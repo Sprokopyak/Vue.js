@@ -1,25 +1,17 @@
 import Vue from 'vue'
-import VueResource from 'vue-resource'
+import VueRouter from 'vue-router'
 import App from './App.vue'
+import { routes } from './routes'
 
-Vue.use(VueResource);
-
-Vue.http.options.root = 'https://vue-test-11d6a.firebaseio.com/';
-Vue.http.interceptors.push((request, next)=>{
-  console.log(request)
-  if(request.method =='POST'){
-    request.method = 'PUT'
-  }
-  next(response=>{
-    response.json = () => {
-      return {
-        messags: response.body
-      }
-    }
-  })
+const router = new VueRouter ({
+  routes, 
+  mode: 'history'
 })
+
+Vue.use(VueRouter)
 
 new Vue({
   el: '#app',
+  router,
   render: h => h(App)
 })
