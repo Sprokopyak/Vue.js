@@ -3,12 +3,17 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import { routes } from './routes'
 
+Vue.use(VueRouter)
+
 const router = new VueRouter ({
   routes, 
   mode: 'history'
 })
 
-Vue.use(VueRouter)
+router.beforeEach((to, from, next)=>{
+  console.log('sda')
+  next()
+});
 
 new Vue({
   el: '#app',
